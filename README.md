@@ -1,10 +1,10 @@
-# в файл __init__.py добавить следующие строчки
+## в файл __init__.py добавить следующие строчки
 
 ```python
 default_app_config = 'post.apps.PostConfig'
 ```
 
-# если наша модель условно выглядит таким образом
+## если наша модель условно выглядит таким образом
 
 ```python
 from django.db import models
@@ -27,7 +27,7 @@ class Post(models.Model):
 
 ```
 
-# то необходимо создать файл signals.py
+## то необходимо создать файл signals.py
 
 ```python
 from django.db import transaction
@@ -43,7 +43,7 @@ def add_created_at(sender, instance, **kwargs):
         instance.created_at = timezone.now()
 ```
 
-# и в apps.py добавить 
+## и в apps.py добавить 
 
 ```python
 from django.apps import AppConfig
@@ -58,5 +58,4 @@ class PostConfig(AppConfig):
         pre_save.connect(post.signals.add_created_at, sender=post.models.Post)
 ```
 
-# поле created_at будет автоматически заполняться текущим временем, 
-# если пользователь не заполнил его
+## поле created_at будет автоматически заполняться текущим временем, если пользователь не заполнил его
